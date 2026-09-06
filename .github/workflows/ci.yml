@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: true
+      - name: Install frontend dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Build embedded frontend
+        run: npm run build
+      - name: Test with race detector
+        run: go test -race ./...
+      - name: Vet
+        run: go vet ./...
+      - name: Build
+        run: CGO_ENABLED=0 go build -trimpath -o webssh ./cmd/webssh

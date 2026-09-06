@@ -1,0 +1,19 @@
+services:
+  webssh:
+    build: .
+    restart: unless-stopped
+    user: "65532:65532"
+    ports:
+      - "8080:8080"
+    environment:
+      WEBSSH_ADMIN_USER: admin
+      WEBSSH_ADMIN_PASSWORD: ${WEBSSH_ADMIN_PASSWORD:?set WEBSSH_ADMIN_PASSWORD}
+    volumes:
+      - webssh-data:/data
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+volumes:
+  webssh-data:

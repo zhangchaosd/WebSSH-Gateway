@@ -1,0 +1,10 @@
+data/
+.toolchains/
+.gocache/
+.gomodcache/
+node_modules/
+web/dist/assets/
+webssh
+*.db
+*.db-shm
+*.db-wal

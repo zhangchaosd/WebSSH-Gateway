@@ -1,0 +1,8 @@
+.git
+.toolchains
+.gocache
+.gomodcache
+node_modules
+data
+webssh
+*.db*
