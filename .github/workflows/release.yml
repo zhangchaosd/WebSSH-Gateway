@@ -58,7 +58,7 @@ jobs:
           else
             go build -trimpath -ldflags="-s -w -X main.version=${VERSION}" -o "package/webssh" ./cmd/webssh
             cp README.md README_CN.md LICENSE package/
-            tar -C package -czf "release/${NAME}.tar.gz" .
+            tar -czf "release/${NAME}.tar.gz" -C package .
           fi
           (cd release && sha256sum * > "${NAME}.sha256")
       - uses: actions/upload-artifact@v4

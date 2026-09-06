@@ -4,7 +4,7 @@ data/
 .gomodcache/
 node_modules/
 web/dist/assets/
-webssh
+/webssh
 *.db
 *.db-shm
 *.db-wal
